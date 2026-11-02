@@ -1,0 +1,14 @@
+{
+  "entries": [
+    {
+      "name": "XRQR",
+      "base": "https://xrqr-d3574c.gitlab.io",
+      "keys": [
+        {
+          "kid": "vJTvXH1RTFw",
+          "ed25519": "IoFm9slAzRJJBVEY-Xk1vf9bzQ3OT7UBL_s9x1aYNwY"
+        }
+      ]
+    }
+  ]
+}

@@ -1,12 +1,18 @@
 {
   "dependencies": {
+    "com.netpyoung.webp": "0.3.22",
+    "com.unity.cloud.gltfast": "6.20.0",
+    "com.unity.cloud.ktx": "3.7.1",
     "com.unity.feature.development": "1.0.2",
-    "com.unity.ide.rider": "3.0.40",
+    "com.unity.ide.rider": "3.1.0",
     "com.unity.ide.visualstudio": "2.0.26",
-    "com.unity.inputsystem": "1.20.0",
+    "com.unity.inputsystem": "1.20.1",
     "com.unity.learn.iet-framework": "6.0.7",
     "com.unity.mobile.android-logcat": "1.4.7",
     "com.unity.render-pipelines.universal": "17.6.0",
+    "com.unity.sdk.linux-arm64": "1.1.0",
+    "com.unity.sdk.linux-x86_64": "1.1.0",
+    "com.unity.toolchain.linux-x86_64-linux": "1.1.0",
     "com.unity.xr.arcore": "6.6.2",
     "com.unity.xr.arfoundation": "6.6.2",
     "com.unity.xr.arkit": "6.6.2",
@@ -48,5 +54,14 @@
     "com.unity.modules.video": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
     "com.unity.modules.xr": "1.0.0"
-  }
+  },
+  "scopedRegistries": [
+    {
+      "name": "OpenUPM",
+      "url": "https://package.openupm.com",
+      "scopes": [
+        "com.netpyoung.webp"
+      ]
+    }
+  ]
 }

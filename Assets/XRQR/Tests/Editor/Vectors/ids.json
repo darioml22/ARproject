@@ -1,0 +1,180 @@
+{
+  "description": "Ids (spec 3). `valid`: `publisher` and `random` (16 octets, hex) give, through the section 3.1 layout, the UUID and the canonical text; the text decodes back to the same UUID. `alternate`: decodable non-canonical spellings and their canonical form. `invalid`: texts a decoder rejects, with the reason.",
+  "error_kinds": {
+    "length": "not 26 symbols",
+    "symbol": "a character outside the alphabet after case folding and I/L/O mapping",
+    "first-symbol": "first symbol above 7",
+    "version": "version bits are not 1000",
+    "variant": "variant bits are not 10"
+  },
+  "valid": [
+    {
+      "name": "specification example",
+      "publisher": 1234,
+      "random": "0009a501123d8474b8561a6e4815d3fd",
+      "uuid": "0009a501-123d-8474-b856-1a6e4815d3fd",
+      "text": "0016JG24HXGHTBGNGTDS41BMZX"
+    },
+    {
+      "name": "publisher 0",
+      "publisher": 0,
+      "random": "0c52ea13fac287a160fc8897b55969ae",
+      "uuid": "00000013-fac2-87a1-a0fc-8897b55969ae",
+      "text": "0000017YP2GYGT1Z48JYTNJTDE"
+    },
+    {
+      "name": "publisher 1",
+      "publisher": 1,
+      "random": "589259b8ec70219fe39c8c155fdf90c5",
+      "uuid": "000003b8-ec70-819f-a39c-8c155fdf90c5",
+      "text": "00001VHV3GG6FT774C2NFXZ465"
+    },
+    {
+      "name": "publisher 1234, second id",
+      "publisher": 1234,
+      "random": "ee42ffdb7e9cda8fed6a36543ee6a9f5",
+      "uuid": "0009a5db-7e9c-8a8f-ad6a-36543ee6a9f5",
+      "text": "0016JXPZMWHA7TTTHPAGZEDAFN"
+    },
+    {
+      "name": "highest publisher number",
+      "publisher": 8388607,
+      "random": "04d548f81864a633aa4be4791a69e9ea",
+      "uuid": "fffffef8-1864-8633-aa4b-e4791a69e9ea",
+      "text": "7ZZZZFG634GRSTMJZ4F4D6KTFA"
+    },
+    {
+      "name": "random bits all zero",
+      "publisher": 5,
+      "random": "00000000000000000000000000000000",
+      "uuid": "00000a00-0000-8000-8000-000000000000",
+      "text": "0000500000G008000000000000"
+    },
+    {
+      "name": "random bits all one",
+      "publisher": 5,
+      "random": "ffffffffffffffffffffffffffffffff",
+      "uuid": "00000bff-ffff-8fff-bfff-ffffffffffff",
+      "text": "00005ZZZZZHZZVZZZZZZZZZZZZ"
+    }
+  ],
+  "alternate": [
+    {
+      "name": "lower case",
+      "text": "0016jg24hxghtbgngtds41bmzx",
+      "canonical": "0016JG24HXGHTBGNGTDS41BMZX"
+    },
+    {
+      "name": "mixed case",
+      "text": "0016jg24hxghtBGNGTDS41BMZX",
+      "canonical": "0016JG24HXGHTBGNGTDS41BMZX"
+    },
+    {
+      "name": "O for 0",
+      "text": "0O16JG24HXGHTBGNGTDS41BMZX",
+      "canonical": "0016JG24HXGHTBGNGTDS41BMZX"
+    },
+    {
+      "name": "o for 0",
+      "text": "0o16JG24HXGHTBGNGTDS41BMZX",
+      "canonical": "0016JG24HXGHTBGNGTDS41BMZX"
+    },
+    {
+      "name": "I for 1",
+      "text": "00I6JG24HXGHTBGNGTDS41BMZX",
+      "canonical": "0016JG24HXGHTBGNGTDS41BMZX"
+    },
+    {
+      "name": "i for 1",
+      "text": "00i6JG24HXGHTBGNGTDS41BMZX",
+      "canonical": "0016JG24HXGHTBGNGTDS41BMZX"
+    },
+    {
+      "name": "L for 1",
+      "text": "0016JG24HXGHTBGNGTDS4LBMZX",
+      "canonical": "0016JG24HXGHTBGNGTDS41BMZX"
+    },
+    {
+      "name": "l for 1",
+      "text": "0016JG24HXGHTBGNGTDS4lBMZX",
+      "canonical": "0016JG24HXGHTBGNGTDS41BMZX"
+    }
+  ],
+  "invalid": [
+    {
+      "name": "empty",
+      "text": "",
+      "error": "length"
+    },
+    {
+      "name": "25 symbols",
+      "text": "0016JG24HXGHTBGNGTDS41BMZ",
+      "error": "length"
+    },
+    {
+      "name": "27 symbols",
+      "text": "0016JG24HXGHTBGNGTDS41BMZX0",
+      "error": "length"
+    },
+    {
+      "name": "check symbol appended",
+      "text": "0016JG24HXGHTBGNGTDS41BMZX*",
+      "error": "length"
+    },
+    {
+      "name": "hyphenated",
+      "text": "0016J-24HXGHTBGNGTDS41BMZX",
+      "error": "symbol"
+    },
+    {
+      "name": "U",
+      "text": "0016JG24HXGHTBGNGTDS41BMZU",
+      "error": "symbol"
+    },
+    {
+      "name": "check symbol in place",
+      "text": "0016JG24HXGHTBGNGTDS41BMZ*",
+      "error": "symbol"
+    },
+    {
+      "name": "space",
+      "text": "0016JG24HXGHTBGNGTDS41BMZ ",
+      "error": "symbol"
+    },
+    {
+      "name": "non-ASCII",
+      "text": "0016JG24HXGHTBGNGTDS41BMZÄ",
+      "error": "symbol"
+    },
+    {
+      "name": "first symbol 8",
+      "text": "8016JG24HXGHTBGNGTDS41BMZX",
+      "error": "first-symbol"
+    },
+    {
+      "name": "first symbol Z",
+      "text": "Z016JG24HXGHTBGNGTDS41BMZX",
+      "error": "first-symbol"
+    },
+    {
+      "name": "version 4",
+      "text": "0016JG24HX8HTBGNGTDS41BMZX",
+      "error": "version"
+    },
+    {
+      "name": "version 0",
+      "text": "0016JG24HX0HTBGNGTDS41BMZX",
+      "error": "version"
+    },
+    {
+      "name": "variant 11",
+      "text": "0016JG24HXGHTFGNGTDS41BMZX",
+      "error": "variant"
+    },
+    {
+      "name": "variant 0x",
+      "text": "0016JG24HXGHT3GNGTDS41BMZX",
+      "error": "variant"
+    }
+  ]
+}

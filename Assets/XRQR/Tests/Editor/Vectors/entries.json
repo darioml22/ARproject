@@ -1,0 +1,438 @@
+{
+  "description": "Resolver entries (spec 4.1, 7.1). `valid` entries parse; `invalid` ones are rejected with the reason. Names count Unicode scalar values.",
+  "error_kinds": {
+    "json": "not a JSON object with the required members of the right types",
+    "name": "name outside 1 to 100 characters",
+    "base": "base is not an absolute https URL with a host and without user information, query, fragment, or trailing slash",
+    "keys": "no keys",
+    "key": "a key is not 32 octets of canonical base64url, not an Ed25519 public key, or of small order",
+    "kid": "a kid is not the key id of its key"
+  },
+  "valid": [
+    {
+      "name": "specification example",
+      "entry": {
+        "name": "XRQR main",
+        "base": "https://resolver.example",
+        "keys": [
+          {
+            "kid": "If4x36FUomE",
+            "ed25519": "11qYAYKxCrfVS_7TyWQHOg7hcvPapiMlrwIaaPcHURo"
+          }
+        ]
+      }
+    },
+    {
+      "name": "base with a path",
+      "entry": {
+        "name": "XRQR main",
+        "base": "https://example.org/xrqr/v1",
+        "keys": [
+          {
+            "kid": "If4x36FUomE",
+            "ed25519": "11qYAYKxCrfVS_7TyWQHOg7hcvPapiMlrwIaaPcHURo"
+          }
+        ]
+      }
+    },
+    {
+      "name": "base with a port",
+      "entry": {
+        "name": "XRQR main",
+        "base": "https://example.org:8443",
+        "keys": [
+          {
+            "kid": "If4x36FUomE",
+            "ed25519": "11qYAYKxCrfVS_7TyWQHOg7hcvPapiMlrwIaaPcHURo"
+          }
+        ]
+      }
+    },
+    {
+      "name": "base with an IPv6 host",
+      "entry": {
+        "name": "XRQR main",
+        "base": "https://[2001:db8::1]:8443/xrqr",
+        "keys": [
+          {
+            "kid": "If4x36FUomE",
+            "ed25519": "11qYAYKxCrfVS_7TyWQHOg7hcvPapiMlrwIaaPcHURo"
+          }
+        ]
+      }
+    },
+    {
+      "name": "two keys",
+      "entry": {
+        "name": "XRQR main",
+        "base": "https://resolver.example",
+        "keys": [
+          {
+            "kid": "If4x36FUomE",
+            "ed25519": "11qYAYKxCrfVS_7TyWQHOg7hcvPapiMlrwIaaPcHURo"
+          },
+          {
+            "kid": "OfcT0KZEJT8",
+            "ed25519": "PUAXw-hDiVqStwqnTRt-vJyYLM8uxJaMwM1V8Sr0Zgw"
+          }
+        ]
+      }
+    },
+    {
+      "name": "name of 100 characters",
+      "entry": {
+        "name": "éééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééé",
+        "base": "https://resolver.example",
+        "keys": [
+          {
+            "kid": "If4x36FUomE",
+            "ed25519": "11qYAYKxCrfVS_7TyWQHOg7hcvPapiMlrwIaaPcHURo"
+          }
+        ]
+      }
+    },
+    {
+      "name": "unknown member ignored",
+      "entry": {
+        "name": "XRQR main",
+        "base": "https://resolver.example",
+        "keys": [
+          {
+            "kid": "If4x36FUomE",
+            "ed25519": "11qYAYKxCrfVS_7TyWQHOg7hcvPapiMlrwIaaPcHURo"
+          }
+        ],
+        "mirror": "https://other.example"
+      }
+    }
+  ],
+  "invalid": [
+    {
+      "name": "empty name",
+      "entry": {
+        "name": "",
+        "base": "https://resolver.example",
+        "keys": [
+          {
+            "kid": "If4x36FUomE",
+            "ed25519": "11qYAYKxCrfVS_7TyWQHOg7hcvPapiMlrwIaaPcHURo"
+          }
+        ]
+      },
+      "error": "name"
+    },
+    {
+      "name": "name of 101 characters",
+      "entry": {
+        "name": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "base": "https://resolver.example",
+        "keys": [
+          {
+            "kid": "If4x36FUomE",
+            "ed25519": "11qYAYKxCrfVS_7TyWQHOg7hcvPapiMlrwIaaPcHURo"
+          }
+        ]
+      },
+      "error": "name"
+    },
+    {
+      "name": "http base",
+      "entry": {
+        "name": "XRQR main",
+        "base": "http://resolver.example",
+        "keys": [
+          {
+            "kid": "If4x36FUomE",
+            "ed25519": "11qYAYKxCrfVS_7TyWQHOg7hcvPapiMlrwIaaPcHURo"
+          }
+        ]
+      },
+      "error": "base"
+    },
+    {
+      "name": "base with query",
+      "entry": {
+        "name": "XRQR main",
+        "base": "https://resolver.example?x=1",
+        "keys": [
+          {
+            "kid": "If4x36FUomE",
+            "ed25519": "11qYAYKxCrfVS_7TyWQHOg7hcvPapiMlrwIaaPcHURo"
+          }
+        ]
+      },
+      "error": "base"
+    },
+    {
+      "name": "base with fragment",
+      "entry": {
+        "name": "XRQR main",
+        "base": "https://resolver.example#top",
+        "keys": [
+          {
+            "kid": "If4x36FUomE",
+            "ed25519": "11qYAYKxCrfVS_7TyWQHOg7hcvPapiMlrwIaaPcHURo"
+          }
+        ]
+      },
+      "error": "base"
+    },
+    {
+      "name": "base with trailing slash",
+      "entry": {
+        "name": "XRQR main",
+        "base": "https://resolver.example/",
+        "keys": [
+          {
+            "kid": "If4x36FUomE",
+            "ed25519": "11qYAYKxCrfVS_7TyWQHOg7hcvPapiMlrwIaaPcHURo"
+          }
+        ]
+      },
+      "error": "base"
+    },
+    {
+      "name": "base without host",
+      "entry": {
+        "name": "XRQR main",
+        "base": "https://",
+        "keys": [
+          {
+            "kid": "If4x36FUomE",
+            "ed25519": "11qYAYKxCrfVS_7TyWQHOg7hcvPapiMlrwIaaPcHURo"
+          }
+        ]
+      },
+      "error": "base"
+    },
+    {
+      "name": "base with a port and no host",
+      "entry": {
+        "name": "XRQR main",
+        "base": "https://:8443",
+        "keys": [
+          {
+            "kid": "If4x36FUomE",
+            "ed25519": "11qYAYKxCrfVS_7TyWQHOg7hcvPapiMlrwIaaPcHURo"
+          }
+        ]
+      },
+      "error": "base"
+    },
+    {
+      "name": "base with a path and no host",
+      "entry": {
+        "name": "XRQR main",
+        "base": "https:///xrqr",
+        "keys": [
+          {
+            "kid": "If4x36FUomE",
+            "ed25519": "11qYAYKxCrfVS_7TyWQHOg7hcvPapiMlrwIaaPcHURo"
+          }
+        ]
+      },
+      "error": "base"
+    },
+    {
+      "name": "base with user information",
+      "entry": {
+        "name": "XRQR main",
+        "base": "https://user@resolver.example",
+        "keys": [
+          {
+            "kid": "If4x36FUomE",
+            "ed25519": "11qYAYKxCrfVS_7TyWQHOg7hcvPapiMlrwIaaPcHURo"
+          }
+        ]
+      },
+      "error": "base"
+    },
+    {
+      "name": "base with a port that is not decimal",
+      "entry": {
+        "name": "XRQR main",
+        "base": "https://resolver.example:x",
+        "keys": [
+          {
+            "kid": "If4x36FUomE",
+            "ed25519": "11qYAYKxCrfVS_7TyWQHOg7hcvPapiMlrwIaaPcHURo"
+          }
+        ]
+      },
+      "error": "base"
+    },
+    {
+      "name": "relative base",
+      "entry": {
+        "name": "XRQR main",
+        "base": "/xrqr",
+        "keys": [
+          {
+            "kid": "If4x36FUomE",
+            "ed25519": "11qYAYKxCrfVS_7TyWQHOg7hcvPapiMlrwIaaPcHURo"
+          }
+        ]
+      },
+      "error": "base"
+    },
+    {
+      "name": "no keys",
+      "entry": {
+        "name": "XRQR main",
+        "base": "https://resolver.example",
+        "keys": []
+      },
+      "error": "keys"
+    },
+    {
+      "name": "keys missing",
+      "entry": {
+        "name": "XRQR main",
+        "base": "https://resolver.example"
+      },
+      "error": "json"
+    },
+    {
+      "name": "key of 31 octets",
+      "entry": {
+        "name": "XRQR main",
+        "base": "https://resolver.example",
+        "keys": [
+          {
+            "kid": "a5YmKAcxVyM",
+            "ed25519": "11qYAYKxCrfVS_7TyWQHOg7hcvPapiMlrwIaaPcHUQ"
+          }
+        ]
+      },
+      "error": "key"
+    },
+    {
+      "name": "key with padding",
+      "entry": {
+        "name": "XRQR main",
+        "base": "https://resolver.example",
+        "keys": [
+          {
+            "kid": "If4x36FUomE",
+            "ed25519": "11qYAYKxCrfVS_7TyWQHOg7hcvPapiMlrwIaaPcHURo="
+          }
+        ]
+      },
+      "error": "key"
+    },
+    {
+      "name": "kid not matching key",
+      "entry": {
+        "name": "XRQR main",
+        "base": "https://resolver.example",
+        "keys": [
+          {
+            "kid": "OfcT0KZEJT8",
+            "ed25519": "11qYAYKxCrfVS_7TyWQHOg7hcvPapiMlrwIaaPcHURo"
+          }
+        ]
+      },
+      "error": "kid"
+    },
+    {
+      "name": "short kid",
+      "entry": {
+        "name": "XRQR main",
+        "base": "https://resolver.example",
+        "keys": [
+          {
+            "kid": "If4x36FUom",
+            "ed25519": "11qYAYKxCrfVS_7TyWQHOg7hcvPapiMlrwIaaPcHURo"
+          }
+        ]
+      },
+      "error": "kid"
+    },
+    {
+      "name": "not an object",
+      "entry": [
+        {
+          "name": "XRQR main",
+          "base": "https://resolver.example",
+          "keys": [
+            {
+              "kid": "If4x36FUomE",
+              "ed25519": "11qYAYKxCrfVS_7TyWQHOg7hcvPapiMlrwIaaPcHURo"
+            }
+          ]
+        }
+      ],
+      "error": "json"
+    },
+    {
+      "name": "key in standard Base64",
+      "entry": {
+        "name": "XRQR main",
+        "base": "https://resolver.example",
+        "keys": [
+          {
+            "kid": "If4x36FUomE",
+            "ed25519": "11qYAYKxCrfVS/7TyWQHOg7hcvPapiMlrwIaaPcHURo"
+          }
+        ]
+      },
+      "error": "key"
+    },
+    {
+      "name": "key not on the curve",
+      "entry": {
+        "name": "XRQR main",
+        "base": "https://resolver.example",
+        "keys": [
+          {
+            "kid": "V3j5hdt1TGY",
+            "ed25519": "AgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          }
+        ]
+      },
+      "error": "key"
+    },
+    {
+      "name": "small-order key",
+      "entry": {
+        "name": "XRQR main",
+        "base": "https://resolver.example",
+        "keys": [
+          {
+            "kid": "AdD6vSUfy74",
+            "ed25519": "AQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+          }
+        ]
+      },
+      "error": "key"
+    },
+    {
+      "name": "key with non-zero trailing bits",
+      "entry": {
+        "name": "XRQR main",
+        "base": "https://resolver.example",
+        "keys": [
+          {
+            "kid": "If4x36FUomE",
+            "ed25519": "11qYAYKxCrfVS_7TyWQHOg7hcvPapiMlrwIaaPcHURp"
+          }
+        ]
+      },
+      "error": "key"
+    },
+    {
+      "name": "kid with non-zero trailing bits",
+      "entry": {
+        "name": "XRQR main",
+        "base": "https://resolver.example",
+        "keys": [
+          {
+            "kid": "If4x36FUomF",
+            "ed25519": "11qYAYKxCrfVS_7TyWQHOg7hcvPapiMlrwIaaPcHURo"
+          }
+        ]
+      },
+      "error": "kid"
+    }
+  ]
+}

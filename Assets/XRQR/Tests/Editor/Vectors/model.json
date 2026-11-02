@@ -1,0 +1,73 @@
+{
+  "description": "Model responses (spec 7.3), verified against their metadata. `request` is the path the client asked for; `metadata` is the text of the verified metadata response of the same path kind, signed with the entry in keys.json; `body` is the model response body in base64url. A case expects either the verified `version` or an `error`. Keys are RFC 8032 section 7.1 TEST 1 (the resolver) and TEST 2 (a foreign key). Their secret keys are published: examples and tests only.",
+  "error_kinds": {
+    "version": "the metadata's version differs from the pinned version requested",
+    "size": "the length of the body differs from the metadata's bytes",
+    "hash": "the SHA-256 of the body differs from the metadata's sha256"
+  },
+  "cases": [
+    {
+      "name": "latest path",
+      "request": "/0016JG24HXGHTBGNGTDS41BMZX",
+      "metadata": "{\n  \"v\": 1,\n  \"id\": \"0016JG24HXGHTBGNGTDS41BMZX\",\n  \"version\": 3,\n  \"bytes\": 64,\n  \"sha256\": \"440f1d0e2f389f8092e82496381b7d050f0f10d607f0ef1ff197bb27634005eb\",\n  \"max_bytes\": 10485760,\n  \"publisher\": {\n    \"number\": 1234,\n    \"name\": \"Example Furniture\"\n  },\n  \"title\": \"Oak dining chair\",\n  \"link\": \"https://shop.example/oak-dining-chair\",\n  \"thumbnail\": {\n    \"type\": \"image/webp\",\n    \"data\": \"UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA\"\n  },\n  \"surface\": \"floor\",\n  \"dimensions\": {\n    \"x\": 0.45,\n    \"y\": 0.92,\n    \"z\": 0.52\n  },\n  \"sig\": {\n    \"kid\": \"If4x36FUomE\",\n    \"value\": \"1a88brIveht-fCFmEe0WRCpnoVPoJ-Q-qDOqGwpB_E-FeBhzzMZEfCibqWFme5s1JC0hPGP_H_Zklpc0nDU4Cw\"\n  }\n}",
+      "body": "Z2xURgIAAADvWWQ3Bu4OuzIxgTpqv2D74wTgY8emBko0H0jQs2YcsXjVxPRO5ECkYhyEIF366AnEd6tIjeWpxA",
+      "version": 3
+    },
+    {
+      "name": "pinned path",
+      "request": "/0016JG24HXGHTBGNGTDS41BMZX/v/3",
+      "metadata": "{\n  \"v\": 1,\n  \"id\": \"0016JG24HXGHTBGNGTDS41BMZX\",\n  \"version\": 3,\n  \"bytes\": 64,\n  \"sha256\": \"440f1d0e2f389f8092e82496381b7d050f0f10d607f0ef1ff197bb27634005eb\",\n  \"max_bytes\": 10485760,\n  \"publisher\": {\n    \"number\": 1234,\n    \"name\": \"Example Furniture\"\n  },\n  \"title\": \"Oak dining chair\",\n  \"link\": \"https://shop.example/oak-dining-chair\",\n  \"thumbnail\": {\n    \"type\": \"image/webp\",\n    \"data\": \"UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA\"\n  },\n  \"surface\": \"floor\",\n  \"dimensions\": {\n    \"x\": 0.45,\n    \"y\": 0.92,\n    \"z\": 0.52\n  },\n  \"sig\": {\n    \"kid\": \"If4x36FUomE\",\n    \"value\": \"1a88brIveht-fCFmEe0WRCpnoVPoJ-Q-qDOqGwpB_E-FeBhzzMZEfCibqWFme5s1JC0hPGP_H_Zklpc0nDU4Cw\"\n  }\n}",
+      "body": "Z2xURgIAAADvWWQ3Bu4OuzIxgTpqv2D74wTgY8emBko0H0jQs2YcsXjVxPRO5ECkYhyEIF366AnEd6tIjeWpxA",
+      "version": 3
+    },
+    {
+      "name": "version 1",
+      "request": "/0016JG24HXGHTBGNGTDS41BMZX",
+      "metadata": "{\n  \"v\": 1,\n  \"id\": \"0016JG24HXGHTBGNGTDS41BMZX\",\n  \"version\": 1,\n  \"bytes\": 64,\n  \"sha256\": \"440f1d0e2f389f8092e82496381b7d050f0f10d607f0ef1ff197bb27634005eb\",\n  \"max_bytes\": 10485760,\n  \"publisher\": {\n    \"number\": 1234,\n    \"name\": \"Example Furniture\"\n  },\n  \"title\": \"Oak dining chair\",\n  \"link\": \"https://shop.example/oak-dining-chair\",\n  \"thumbnail\": {\n    \"type\": \"image/webp\",\n    \"data\": \"UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA\"\n  },\n  \"surface\": \"floor\",\n  \"dimensions\": {\n    \"x\": 0.45,\n    \"y\": 0.92,\n    \"z\": 0.52\n  },\n  \"sig\": {\n    \"kid\": \"If4x36FUomE\",\n    \"value\": \"iv1yK59R8rXOmdvcu9WYX1EzE1rP0dy0xteFXjjuQ6Sy7G5K-I2fHzVXs4WEow50fa-7_M_mKnhuEGrzaJkzDA\"\n  }\n}",
+      "body": "Z2xURgIAAADvWWQ3Bu4OuzIxgTpqv2D74wTgY8emBko0H0jQs2YcsXjVxPRO5ECkYhyEIF366AnEd6tIjeWpxA",
+      "version": 1
+    },
+    {
+      "name": "body of one octet",
+      "request": "/0016JG24HXGHTBGNGTDS41BMZX",
+      "metadata": "{\n  \"v\": 1,\n  \"id\": \"0016JG24HXGHTBGNGTDS41BMZX\",\n  \"version\": 3,\n  \"bytes\": 1,\n  \"sha256\": \"cd0aa9856147b6c5b4ff2b7dfee5da20aa38253099ef1b4a64aced233c9afe29\",\n  \"max_bytes\": 10485760,\n  \"publisher\": {\n    \"number\": 1234,\n    \"name\": \"Example Furniture\"\n  },\n  \"title\": \"Oak dining chair\",\n  \"link\": \"https://shop.example/oak-dining-chair\",\n  \"thumbnail\": {\n    \"type\": \"image/webp\",\n    \"data\": \"UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA\"\n  },\n  \"surface\": \"floor\",\n  \"dimensions\": {\n    \"x\": 0.45,\n    \"y\": 0.92,\n    \"z\": 0.52\n  },\n  \"sig\": {\n    \"kid\": \"If4x36FUomE\",\n    \"value\": \"fs2SUXqNrYm1ouwDS7-iKhiJXKFNQNpR7CH_uwno-lcV7NEUkwsVDfIwb0siHoKBsMPXeMzcpg0Aiott0xooDQ\"\n  }\n}",
+      "body": "Zw",
+      "version": 3
+    },
+    {
+      "name": "pinned version mismatch",
+      "request": "/0016JG24HXGHTBGNGTDS41BMZX/v/2",
+      "metadata": "{\n  \"v\": 1,\n  \"id\": \"0016JG24HXGHTBGNGTDS41BMZX\",\n  \"version\": 3,\n  \"bytes\": 64,\n  \"sha256\": \"440f1d0e2f389f8092e82496381b7d050f0f10d607f0ef1ff197bb27634005eb\",\n  \"max_bytes\": 10485760,\n  \"publisher\": {\n    \"number\": 1234,\n    \"name\": \"Example Furniture\"\n  },\n  \"title\": \"Oak dining chair\",\n  \"link\": \"https://shop.example/oak-dining-chair\",\n  \"thumbnail\": {\n    \"type\": \"image/webp\",\n    \"data\": \"UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA\"\n  },\n  \"surface\": \"floor\",\n  \"dimensions\": {\n    \"x\": 0.45,\n    \"y\": 0.92,\n    \"z\": 0.52\n  },\n  \"sig\": {\n    \"kid\": \"If4x36FUomE\",\n    \"value\": \"1a88brIveht-fCFmEe0WRCpnoVPoJ-Q-qDOqGwpB_E-FeBhzzMZEfCibqWFme5s1JC0hPGP_H_Zklpc0nDU4Cw\"\n  }\n}",
+      "body": "Z2xURgIAAADvWWQ3Bu4OuzIxgTpqv2D74wTgY8emBko0H0jQs2YcsXjVxPRO5ECkYhyEIF366AnEd6tIjeWpxA",
+      "error": "version"
+    },
+    {
+      "name": "body longer than bytes",
+      "request": "/0016JG24HXGHTBGNGTDS41BMZX",
+      "metadata": "{\n  \"v\": 1,\n  \"id\": \"0016JG24HXGHTBGNGTDS41BMZX\",\n  \"version\": 3,\n  \"bytes\": 64,\n  \"sha256\": \"440f1d0e2f389f8092e82496381b7d050f0f10d607f0ef1ff197bb27634005eb\",\n  \"max_bytes\": 10485760,\n  \"publisher\": {\n    \"number\": 1234,\n    \"name\": \"Example Furniture\"\n  },\n  \"title\": \"Oak dining chair\",\n  \"link\": \"https://shop.example/oak-dining-chair\",\n  \"thumbnail\": {\n    \"type\": \"image/webp\",\n    \"data\": \"UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA\"\n  },\n  \"surface\": \"floor\",\n  \"dimensions\": {\n    \"x\": 0.45,\n    \"y\": 0.92,\n    \"z\": 0.52\n  },\n  \"sig\": {\n    \"kid\": \"If4x36FUomE\",\n    \"value\": \"1a88brIveht-fCFmEe0WRCpnoVPoJ-Q-qDOqGwpB_E-FeBhzzMZEfCibqWFme5s1JC0hPGP_H_Zklpc0nDU4Cw\"\n  }\n}",
+      "body": "Z2xURgIAAADvWWQ3Bu4OuzIxgTpqv2D74wTgY8emBko0H0jQs2YcsXjVxPRO5ECkYhyEIF366AnEd6tIjeWpxHg",
+      "error": "size"
+    },
+    {
+      "name": "body shorter than bytes",
+      "request": "/0016JG24HXGHTBGNGTDS41BMZX",
+      "metadata": "{\n  \"v\": 1,\n  \"id\": \"0016JG24HXGHTBGNGTDS41BMZX\",\n  \"version\": 3,\n  \"bytes\": 64,\n  \"sha256\": \"440f1d0e2f389f8092e82496381b7d050f0f10d607f0ef1ff197bb27634005eb\",\n  \"max_bytes\": 10485760,\n  \"publisher\": {\n    \"number\": 1234,\n    \"name\": \"Example Furniture\"\n  },\n  \"title\": \"Oak dining chair\",\n  \"link\": \"https://shop.example/oak-dining-chair\",\n  \"thumbnail\": {\n    \"type\": \"image/webp\",\n    \"data\": \"UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA\"\n  },\n  \"surface\": \"floor\",\n  \"dimensions\": {\n    \"x\": 0.45,\n    \"y\": 0.92,\n    \"z\": 0.52\n  },\n  \"sig\": {\n    \"kid\": \"If4x36FUomE\",\n    \"value\": \"1a88brIveht-fCFmEe0WRCpnoVPoJ-Q-qDOqGwpB_E-FeBhzzMZEfCibqWFme5s1JC0hPGP_H_Zklpc0nDU4Cw\"\n  }\n}",
+      "body": "Z2xURgIAAADvWWQ3Bu4OuzIxgTpqv2D74wTgY8emBko0H0jQs2YcsXjVxPRO5ECkYhyEIF366AnEd6tIjeWp",
+      "error": "size"
+    },
+    {
+      "name": "body changed",
+      "request": "/0016JG24HXGHTBGNGTDS41BMZX",
+      "metadata": "{\n  \"v\": 1,\n  \"id\": \"0016JG24HXGHTBGNGTDS41BMZX\",\n  \"version\": 3,\n  \"bytes\": 64,\n  \"sha256\": \"440f1d0e2f389f8092e82496381b7d050f0f10d607f0ef1ff197bb27634005eb\",\n  \"max_bytes\": 10485760,\n  \"publisher\": {\n    \"number\": 1234,\n    \"name\": \"Example Furniture\"\n  },\n  \"title\": \"Oak dining chair\",\n  \"link\": \"https://shop.example/oak-dining-chair\",\n  \"thumbnail\": {\n    \"type\": \"image/webp\",\n    \"data\": \"UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA\"\n  },\n  \"surface\": \"floor\",\n  \"dimensions\": {\n    \"x\": 0.45,\n    \"y\": 0.92,\n    \"z\": 0.52\n  },\n  \"sig\": {\n    \"kid\": \"If4x36FUomE\",\n    \"value\": \"1a88brIveht-fCFmEe0WRCpnoVPoJ-Q-qDOqGwpB_E-FeBhzzMZEfCibqWFme5s1JC0hPGP_H_Zklpc0nDU4Cw\"\n  }\n}",
+      "body": "Z2xURgIAAADvWWQ3Bu4OuzIxgTpqv2D74wTgY8emBko0H0jQs2YcsXjVxPRO5ECkYhyEIF366AnEd6tIjeWpxQ",
+      "error": "hash"
+    },
+    {
+      "name": "body of another version",
+      "request": "/0016JG24HXGHTBGNGTDS41BMZX/v/1",
+      "metadata": "{\n  \"v\": 1,\n  \"id\": \"0016JG24HXGHTBGNGTDS41BMZX\",\n  \"version\": 1,\n  \"bytes\": 64,\n  \"sha256\": \"440f1d0e2f389f8092e82496381b7d050f0f10d607f0ef1ff197bb27634005eb\",\n  \"max_bytes\": 10485760,\n  \"publisher\": {\n    \"number\": 1234,\n    \"name\": \"Example Furniture\"\n  },\n  \"title\": \"Oak dining chair\",\n  \"link\": \"https://shop.example/oak-dining-chair\",\n  \"thumbnail\": {\n    \"type\": \"image/webp\",\n    \"data\": \"UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA\"\n  },\n  \"surface\": \"floor\",\n  \"dimensions\": {\n    \"x\": 0.45,\n    \"y\": 0.92,\n    \"z\": 0.52\n  },\n  \"sig\": {\n    \"kid\": \"If4x36FUomE\",\n    \"value\": \"iv1yK59R8rXOmdvcu9WYX1EzE1rP0dy0xteFXjjuQ6Sy7G5K-I2fHzVXs4WEow50fa-7_M_mKnhuEGrzaJkzDA\"\n  }\n}",
+      "body": "Z2xURgIAAADvWWQ3Bu4OuzIxgTpqv2D74wTgY8emBko0H0jQs2YcsXjVxPRO5ECkYhyEIF366AnEd6tIjeWpxHg",
+      "error": "size"
+    }
+  ]
+}
