@@ -1,0 +1,16 @@
+{
+    "name": "Xrqr.Core",
+    "rootNamespace": "Xrqr",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "BouncyCastle.Cryptography.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": true
+}

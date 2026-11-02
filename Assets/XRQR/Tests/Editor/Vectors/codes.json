@@ -1,0 +1,97 @@
+{
+  "description": "Codes (spec 2). `valid` codes give the canonical id; `invalid` codes are rejected, with the id error kinds of ids.json plus `scheme` for a missing or wrong `XRQR:` prefix.",
+  "valid": [
+    {
+      "name": "canonical",
+      "code": "XRQR:0016JG24HXGHTBGNGTDS41BMZX",
+      "id": "0016JG24HXGHTBGNGTDS41BMZX"
+    },
+    {
+      "name": "lower-case scheme",
+      "code": "xrqr:0016JG24HXGHTBGNGTDS41BMZX",
+      "id": "0016JG24HXGHTBGNGTDS41BMZX"
+    },
+    {
+      "name": "mixed-case scheme",
+      "code": "XrQr:0016JG24HXGHTBGNGTDS41BMZX",
+      "id": "0016JG24HXGHTBGNGTDS41BMZX"
+    },
+    {
+      "name": "lower-case id",
+      "code": "XRQR:0016jg24hxghtbgngtds41bmzx",
+      "id": "0016JG24HXGHTBGNGTDS41BMZX"
+    },
+    {
+      "name": "all lower case",
+      "code": "xrqr:0016jg24hxghtbgngtds41bmzx",
+      "id": "0016JG24HXGHTBGNGTDS41BMZX"
+    },
+    {
+      "name": "I/L/O spellings",
+      "code": "XRQR:OOl6JG24HXGHTBGNGTDS4lBMZX",
+      "id": "0016JG24HXGHTBGNGTDS41BMZX"
+    }
+  ],
+  "invalid": [
+    {
+      "name": "empty",
+      "code": "",
+      "error": "scheme"
+    },
+    {
+      "name": "id only",
+      "code": "0016JG24HXGHTBGNGTDS41BMZX",
+      "error": "scheme"
+    },
+    {
+      "name": "scheme only",
+      "code": "XRQR:",
+      "error": "length"
+    },
+    {
+      "name": "no colon",
+      "code": "XRQR0016JG24HXGHTBGNGTDS41BMZX",
+      "error": "scheme"
+    },
+    {
+      "name": "other scheme",
+      "code": "ARQS:0016JG24HXGHTBGNGTDS41BMZX",
+      "error": "scheme"
+    },
+    {
+      "name": "scheme with space",
+      "code": "XRQR: 0016JG24HXGHTBGNGTDS41BMZX",
+      "error": "length"
+    },
+    {
+      "name": "URL",
+      "code": "https://resolver.example/0016JG24HXGHTBGNGTDS41BMZX",
+      "error": "scheme"
+    },
+    {
+      "name": "trailing newline",
+      "code": "XRQR:0016JG24HXGHTBGNGTDS41BMZX\n",
+      "error": "length"
+    },
+    {
+      "name": "hyphenated id",
+      "code": "XRQR:0016J-24HXGHTBGNGTDS41BMZX",
+      "error": "symbol"
+    },
+    {
+      "name": "first symbol 8",
+      "code": "XRQR:8016JG24HXGHTBGNGTDS41BMZX",
+      "error": "first-symbol"
+    },
+    {
+      "name": "version bits",
+      "code": "XRQR:0016JG24HX8HTBGNGTDS41BMZX",
+      "error": "version"
+    },
+    {
+      "name": "variant bits",
+      "code": "XRQR:0016JG24HXGHTFGNGTDS41BMZX",
+      "error": "variant"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "description": "Signing keys and the resolver entry that the model and metadata vectors use. Keys are RFC 8032 section 7.1 TEST 1 (the resolver) and TEST 2 (a foreign key). Their secret keys are published: examples and tests only.",
+  "keys": [
+    {
+      "name": "resolver",
+      "secret": "9d61b19deffd5a60ba844af492ec2cc44449c5697b326919703bac031cae7f60",
+      "ed25519": "11qYAYKxCrfVS_7TyWQHOg7hcvPapiMlrwIaaPcHURo",
+      "kid": "If4x36FUomE"
+    },
+    {
+      "name": "foreign",
+      "secret": "4ccd089b28ff96da9db6c346ec114e0f5b8a319f35aba624da8cf6ed4fb8a6fb",
+      "ed25519": "PUAXw-hDiVqStwqnTRt-vJyYLM8uxJaMwM1V8Sr0Zgw",
+      "kid": "OfcT0KZEJT8"
+    }
+  ],
+  "entry": {
+    "name": "XRQR main",
+    "base": "https://resolver.example",
+    "keys": [
+      {
+        "kid": "If4x36FUomE",
+        "ed25519": "11qYAYKxCrfVS_7TyWQHOg7hcvPapiMlrwIaaPcHURo"
+      }
+    ]
+  }
+}

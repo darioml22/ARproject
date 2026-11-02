@@ -1,0 +1,183 @@
+{
+  "description": "Client resource paths (spec 5.1, 5.2), relative to the resolver base. `valid` paths name a resource; `canonical` is the path a client sends. `invalid` paths carry the error kind and the status a resolver answers. Versions above 2^32 - 1 are not issued by this implementation, so a resolver answers 404 for them.",
+  "valid": [
+    {
+      "name": "latest model",
+      "path": "/0016JG24HXGHTBGNGTDS41BMZX",
+      "id": "0016JG24HXGHTBGNGTDS41BMZX",
+      "version": null,
+      "kind": "model",
+      "canonical": "/0016JG24HXGHTBGNGTDS41BMZX"
+    },
+    {
+      "name": "latest metadata",
+      "path": "/0016JG24HXGHTBGNGTDS41BMZX/meta",
+      "id": "0016JG24HXGHTBGNGTDS41BMZX",
+      "version": null,
+      "kind": "meta",
+      "canonical": "/0016JG24HXGHTBGNGTDS41BMZX/meta"
+    },
+    {
+      "name": "pinned model",
+      "path": "/0016JG24HXGHTBGNGTDS41BMZX/v/3",
+      "id": "0016JG24HXGHTBGNGTDS41BMZX",
+      "version": 3,
+      "kind": "model",
+      "canonical": "/0016JG24HXGHTBGNGTDS41BMZX/v/3"
+    },
+    {
+      "name": "pinned metadata",
+      "path": "/0016JG24HXGHTBGNGTDS41BMZX/v/3/meta",
+      "id": "0016JG24HXGHTBGNGTDS41BMZX",
+      "version": 3,
+      "kind": "meta",
+      "canonical": "/0016JG24HXGHTBGNGTDS41BMZX/v/3/meta"
+    },
+    {
+      "name": "version 1",
+      "path": "/0016JG24HXGHTBGNGTDS41BMZX/v/1",
+      "id": "0016JG24HXGHTBGNGTDS41BMZX",
+      "version": 1,
+      "kind": "model",
+      "canonical": "/0016JG24HXGHTBGNGTDS41BMZX/v/1"
+    },
+    {
+      "name": "large version",
+      "path": "/0016JG24HXGHTBGNGTDS41BMZX/v/4294967295",
+      "id": "0016JG24HXGHTBGNGTDS41BMZX",
+      "version": 4294967295,
+      "kind": "model",
+      "canonical": "/0016JG24HXGHTBGNGTDS41BMZX/v/4294967295"
+    },
+    {
+      "name": "lower-case id",
+      "path": "/0016jg24hxghtbgngtds41bmzx",
+      "id": "0016JG24HXGHTBGNGTDS41BMZX",
+      "version": null,
+      "kind": "model",
+      "canonical": "/0016JG24HXGHTBGNGTDS41BMZX"
+    }
+  ],
+  "invalid": [
+    {
+      "name": "empty",
+      "path": "",
+      "error": "shape",
+      "status": 404
+    },
+    {
+      "name": "root",
+      "path": "/",
+      "error": "shape",
+      "status": 404
+    },
+    {
+      "name": "no leading slash",
+      "path": "0016JG24HXGHTBGNGTDS41BMZX",
+      "error": "shape",
+      "status": 404
+    },
+    {
+      "name": "trailing slash",
+      "path": "/0016JG24HXGHTBGNGTDS41BMZX/",
+      "error": "shape",
+      "status": 404
+    },
+    {
+      "name": "double slash",
+      "path": "//0016JG24HXGHTBGNGTDS41BMZX",
+      "error": "shape",
+      "status": 404
+    },
+    {
+      "name": "unknown suffix",
+      "path": "/0016JG24HXGHTBGNGTDS41BMZX/info",
+      "error": "shape",
+      "status": 404
+    },
+    {
+      "name": "metadata trailing slash",
+      "path": "/0016JG24HXGHTBGNGTDS41BMZX/meta/",
+      "error": "shape",
+      "status": 404
+    },
+    {
+      "name": "v without number",
+      "path": "/0016JG24HXGHTBGNGTDS41BMZX/v",
+      "error": "shape",
+      "status": 404
+    },
+    {
+      "name": "extra segment",
+      "path": "/0016JG24HXGHTBGNGTDS41BMZX/v/1/model",
+      "error": "shape",
+      "status": 404
+    },
+    {
+      "name": "upper-case META",
+      "path": "/0016JG24HXGHTBGNGTDS41BMZX/META",
+      "error": "shape",
+      "status": 404
+    },
+    {
+      "name": "bad id",
+      "path": "/0016JG24HXGHTBGNGTDS41BMZ",
+      "error": "id",
+      "status": 400
+    },
+    {
+      "name": "bad id, metadata",
+      "path": "/8016JG24HXGHTBGNGTDS41BMZX/meta",
+      "error": "id",
+      "status": 400
+    },
+    {
+      "name": "version 0",
+      "path": "/0016JG24HXGHTBGNGTDS41BMZX/v/0",
+      "error": "version",
+      "status": 400
+    },
+    {
+      "name": "leading zero",
+      "path": "/0016JG24HXGHTBGNGTDS41BMZX/v/03",
+      "error": "version",
+      "status": 400
+    },
+    {
+      "name": "empty version",
+      "path": "/0016JG24HXGHTBGNGTDS41BMZX/v/",
+      "error": "version",
+      "status": 400
+    },
+    {
+      "name": "signed version",
+      "path": "/0016JG24HXGHTBGNGTDS41BMZX/v/+3",
+      "error": "version",
+      "status": 400
+    },
+    {
+      "name": "negative version",
+      "path": "/0016JG24HXGHTBGNGTDS41BMZX/v/-3",
+      "error": "version",
+      "status": 400
+    },
+    {
+      "name": "hexadecimal version",
+      "path": "/0016JG24HXGHTBGNGTDS41BMZX/v/0x3",
+      "error": "version",
+      "status": 400
+    },
+    {
+      "name": "non-ASCII digit",
+      "path": "/0016JG24HXGHTBGNGTDS41BMZX/v/٣",
+      "error": "version",
+      "status": 400
+    },
+    {
+      "name": "version beyond 32 bits",
+      "path": "/0016JG24HXGHTBGNGTDS41BMZX/v/4294967296",
+      "error": "version-range",
+      "status": 404
+    }
+  ]
+}

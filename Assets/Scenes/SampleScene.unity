@@ -5515,7 +5515,7 @@ GameObject:
   - component: {fileID: 1363113593}
   - component: {fileID: 1363113594}
   m_Layer: 0
-  m_Name: QRReader
+  m_Name: XRQR Client
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5545,9 +5545,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1363113592}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5cd350394f8bd954f8d23fd052c4ed9a, type: 3}
+  m_Script: {fileID: 11500000, guid: c6af09800ea84558a0466cfd98cfeefa, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: '::'
+  m_EditorClassIdentifier: Xrqr.Unity::Xrqr.Unity.XrqrController
   cameraManager: {fileID: 331264287}
   outputText: {fileID: 14135328}
 --- !u!1 &1374157835

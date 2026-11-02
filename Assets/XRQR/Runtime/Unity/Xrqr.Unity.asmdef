@@ -1,0 +1,27 @@
+{
+    "name": "Xrqr.Unity",
+    "rootNamespace": "Xrqr.Unity",
+    "references": [
+        "Xrqr.Core",
+        "glTFast",
+        "unity.webp",
+        "Unity.XR.ARFoundation",
+        "Unity.XR.ARSubsystems",
+        "Unity.XR.Interaction.Toolkit.Samples.StarterAssets",
+        "Unity.XR.Interaction.Toolkit.Samples.ARStarterAssets",
+        "Unity.TextMeshPro",
+        "UnityEngine.UI",
+        "Unity.Collections"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "zxing.unity.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
