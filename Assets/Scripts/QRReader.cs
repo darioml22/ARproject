@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
@@ -6,6 +7,8 @@ using ZXing;
 
 public class QRReader : MonoBehaviour
 {
+        public event Action<string> OnQRDetected; // Fired once each time a new QR code (different from the last one) is read
+
     [SerializeField] private ARCameraManager cameraManager;
     [SerializeField] private TMP_Text outputText;
 
@@ -83,7 +86,8 @@ public class QRReader : MonoBehaviour
                 {
                     lastResult = result.Text;
                     Debug.Log("QR read: " + result.Text);
-                    Handheld.Vibrate(); 
+                    Handheld.Vibrate();
+                    OnQRDetected?.Invoke(result.Text);
                 }
 
                 if (outputText != null)
